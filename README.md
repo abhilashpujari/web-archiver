@@ -13,7 +13,7 @@ npm install
 
 ### Command to archive the page
 ```
-node bin/console archive
+npm run archive
 ```
 
 ### Starting server
