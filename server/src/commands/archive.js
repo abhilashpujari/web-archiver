@@ -58,7 +58,7 @@ module.exports = async () => {
             url: url,
             title: firstTrendingTitle,
         },
-        attachment: attachment
+        attachment: attachment._id
     });
 
     //Delete the file from uploads directory once all process is done
