@@ -1,5 +1,5 @@
 const Archive = require('../models/Archive');
-const utils = require('../utils/utils');
+const CriteriaParser = require('../services/criteriaParser');
 
 // @desc  Get all archive
 // @route GET /api/v1/archive
@@ -7,21 +7,23 @@ const utils = require('../utils/utils');
 exports.list = async (req, res, next) => {
     try {
         const query = req.query;
-        const page = req.query.page ? parseInt(req.query.page) : 1;
-        const limitPerPage = req.query.limitPerPage <= 100 ? parseInt(req.query.limitPerPage): 100;
+        const page = query.page ? parseInt(query.page) : 1;
+        const limitPerPage = query.limitPerPage <= 100 ? parseInt(query.limitPerPage): 100;
 
-        let criteria = {};
-
-        const archives = await Archive
-            .find(criteria)
+        let archives = Archive
+            .find()
             .skip((page - 1) * limitPerPage)
             .limit(limitPerPage)
             .populate('attachment')
             .sort({createdAt: -1});
 
+        let criteriaParser = new CriteriaParser(archives, query.criteria);
+        criteriaParser.parse();
+
+        let result = await archives.exec();
 
         return res.status(200).json({
-            data: archives,
+            data: result,
             page,
             limitPerPage,
             query
@@ -29,7 +31,7 @@ exports.list = async (req, res, next) => {
         });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Server error' });
+        res.status(500).json({ error: 'Server Error' });
     }
 };
 
