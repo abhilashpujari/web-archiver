@@ -1,5 +1,6 @@
 const Archive = require('../models/Archive');
 const ArchiveRepository = require('../models/repository/ArchiveRepository');
+const logger = require('../utils/logger');
 
 // @desc  Get all archive
 // @route GET /api/v1/archive
@@ -21,7 +22,7 @@ exports.list = async (req, res, next) => {
 
         });
     } catch (err) {
-        console.error(err);
+        logger.error(err.message);
         res.status(500).json({error: 'Server Error'});
     }
 };
@@ -45,6 +46,7 @@ exports.view = async (req, res, next) => {
 
         return res.status(200).json(archive);
     } catch (err) {
+        logger.error(err.message);
         res.status(500).json({error: 'Server error'});
     }
 };
