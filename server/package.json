@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node app.js",
     "archive": "node bin/console archive",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "Abhilash Pujari",
   "license": "MIT",
@@ -22,9 +24,11 @@
     "puppeteer": "^3.0.2",
     "puppeteer-core": "^3.0.2",
     "winston": "^3.2.1",
-    "winston-daily-rotate-file": "^4.4.2"
+    "winston-daily-rotate-file": "^4.4.2",
+    "snyk": "^1.359.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.3"
-  }
+  },
+  "snyk": true
 }
