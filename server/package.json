@@ -24,7 +24,7 @@
     "puppeteer": "^3.0.2",
     "puppeteer-core": "^3.3.0",
     "winston": "^3.2.1",
-    "winston-daily-rotate-file": "^4.4.2",
+    "winston-daily-rotate-file": "^4.5.0",
     "snyk": "^1.359.1"
   },
   "devDependencies": {
